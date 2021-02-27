@@ -17,15 +17,18 @@ document.getElementById("get-data").addEventListener("click",onClick);
 async function onClick(){
     let responseFromFile = await (await fetch("http://127.0.0.1:5501/testingJSON.json")).json();
     console.log("Line 19",responseFromFile);
-    // let jsonObject = await responseFromFile.json();
     useJSONResponse(responseFromFile);
+
+    // let jsonObject = await responseFromFile.json();
+    // useJSONResponse(jsonObject);
+    
 }
 
 
-function handleFetchResponse(response){
-    console.log("Line 31:",response);
-    return response.json();
-}
+// function handleFetchResponse(response){
+//     console.log("Line 31:",response);
+//     return response.json();
+// }
 
 function useJSONResponse(json) {
     console.log("Line 36: ",json);
@@ -39,7 +42,6 @@ function renderArticles(articleList){
         renderArticle(articleData);
     }
 }
-
 
 function renderArticle(articleData){
     const article = document.createElement("div");
