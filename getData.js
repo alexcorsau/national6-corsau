@@ -2,13 +2,7 @@ console.log("JavaScript - AJAX");
 
 const articleListHtml = document.querySelector(".article-list");
 
-document.getElementById("get-data").addEventListener("click",function (){
-    console.log("Before Fetch");
-    fetch("https://simple-json-server-scit.herokuapp.com/posts")
-        .then(handleFetchResponse)
-        .then(useJSONResponse);
-    console.log("After Fetch");
-});
+document.getElementById("get-data").addEventListener("click",getData);
 
 
 function handleFetchResponse(response){
@@ -29,7 +23,13 @@ function renderArticles(articleList){
     }
 }
 
-
+function getData(){
+    console.log("Before Fetch");
+    fetch("https://simple-json-server-scit.herokuapp.com/posts")
+        .then(handleFetchResponse)
+        .then(useJSONResponse);
+    console.log("After Fetch");
+}
 
 function renderArticle(articleData){
     const article = document.createElement("div");
