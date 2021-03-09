@@ -22,7 +22,7 @@ document
     
 
     console.log("Payload object:",payload);
-    console.log("Payload object strigyfied",JSON.stringify(payload));
+    console.log("Payload object stringified",JSON.stringify(payload));
 
     fetch("https://simple-json-server-scit.herokuapp.com/posts",{
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
