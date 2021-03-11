@@ -87,9 +87,7 @@ function renderArticle(articleData) {
 }
 
 function renderComments(article){
-    let url = "https://simple-json-server-scit.herokuapp.com/comments?postId="+article.id;
-    console.log(url);
-    fetch(url)
+    fetch(`https://simple-json-server-scit.herokuapp.com/comments?postId=${article.id}`)
     // "this .then" is responsible for linking a callback function to the event trigger by the browser when the server responds back
     .then(handleFetchResponse) // returning the answer as an array of objects
     .then(useCommentsList)
@@ -110,9 +108,9 @@ function renderOneComment(input){
     const commentUser = document.createElement("h4");
     const commentContent = document.createElement("p");
 
-    comment.className = "comment";
-    commentUser.className = "comment-user";
-    commentContent.className = "comment-content";
+    comment.classList.add("comment");
+    commentUser.classList.add("comment-user");
+    commentContent.classList.add("comment-content");
 
     comment.appendChild(commentUser);
     comment.appendChild(commentContent);
