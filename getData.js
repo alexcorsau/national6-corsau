@@ -40,21 +40,13 @@ function renderArticles(articleList) {
     // we need to remove the "No data" text in our html list container
     articleListHtml.innerText = "";
 
-    const articleCommentsDivision = document.createElement("div");
-
-
     // the server responds with a list of objects
     // every object represents a article
     // every article has the same structure (id, title, content)
     for (const articleData of articleList) {
         console.log(articleData);
         renderArticle(articleData);
-        // for every article we render all the comments that correspond to the article ID, by calling the function below
-
-        //create the HTML element DIV for rendering the comments
         
-        
-
     }
 }
 
@@ -62,61 +54,68 @@ function renderArticle(articleData) {
     const article = document.createElement("div");
     const articleTitle = document.createElement("h3");
     const articleContent = document.createElement("p");
+    article.id = articleData.id+"";
     
     //create the comments DIV of the article
     const articleComments = document.createElement("div");
-    articleComments.className = "comments-list";
+    articleComments.classList.add("comments-list");
         
     article.appendChild(articleTitle);
     article.appendChild(articleContent);
 
-    //append the comments DIV to the article
+    //append the comments division to the article
     article.appendChild(articleComments);
 
-
     articleListHtml.appendChild(article);
-
     
     // after creating the necessary html structure for a article items, we need to populated with data
     // we use the "articleData" as data source
     articleTitle.innerText = articleData.title;
     articleContent.innerText = articleData.content;
     
+    // for every article we render all the comments that correspond to the article ID, by calling the function below, having the article as argument
     renderComments(articleData);
-
 }
 
 function renderComments(article){
     fetch(`https://simple-json-server-scit.herokuapp.com/comments?postId=${article.id}`)
-    // "this .then" is responsible for linking a callback function to the event trigger by the browser when the server responds back
-    .then(handleFetchResponse) // returning the answer as an array of objects
-    .then(useCommentsList)
+    .then(handleFetchResponse) // reusing the handleFetchResponse function for parsing the json
+    .then(useCommentsList) //function to use the returned answer
 }
 
+// for every valid comment we will call the function responsible for rendering the comment
 function useCommentsList(commentsList){
     if (commentsList) {
-        for (const comment of commentsList) {
+        for (const comment of commentsList) { 
             renderOneComment(comment);
         }
     }
 }
 
+//function to render a comment, that takes as a parameter a comment from the comments section of the server
 function renderOneComment(input){
-    let currentPost = parent.querySelector(".comments-list");
-    console.log(currentPost);
+    //finding the current post division based on the POST ID from the comments objects returned from the comments FETCH so we can add the comment at the correct post
+    let currentPostDiv = document.getElementById(input.postId);
+    // finding the comments division in the selected post division
+    let currentPostCommListDiv = currentPostDiv.querySelector(".comments-list");
+
+    //creating the comment structure
     const comment = document.createElement("div");
     const commentUser = document.createElement("h4");
     const commentContent = document.createElement("p");
 
+    //adding classes to the html structures for further targeting and styling
     comment.classList.add("comment");
     commentUser.classList.add("comment-user");
     commentContent.classList.add("comment-content");
 
+    //appending the created parts of the comment and adding content to the "username" and "content" of the comment
     comment.appendChild(commentUser);
     comment.appendChild(commentContent);
     commentUser.innerText = input.username;
     commentContent.innerText = input.content;
 
-    currentPost[currentPost.length-1].appendChild(comment);
+    //appending the comment to the comments division
+    currentPostCommListDiv.appendChild(comment);
 
 }
