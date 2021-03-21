@@ -1,0 +1,86 @@
+.to-do-header{
+    display: flex;
+    align-items: center;
+    background-color: lightsalmon;
+    height: fit-content;
+    margin-bottom: 5px;
+}
+
+.to-do-list{
+    display: block;
+    align-items: center;
+    height: fit-content;
+    margin-bottom: 5px;
+}
+
+
+.to-do-logo {
+    display: flex;
+    justify-content: center;
+}
+
+.to-do-logo img{
+    width: 30px;
+    height: 30px;
+}
+
+.to-do-user {
+    height: fit-content;
+    color: white;
+}
+
+.add-new-task{
+    display:flex;
+    align-items: center;
+    
+}
+.add-new-task input {
+    margin-right:5px;
+    padding:0;    
+}
+
+#add-new-task-button{
+    border-radius: 100%;
+    background-color: lightsalmon;
+    color: white;
+    border:0;
+    padding:0;
+    display: flex;
+}
+#add-new-task-button img {
+    height: 15px;
+    margin: 2px;
+}
+
+.to-do-division {
+    display: flex;
+    align-items: center;
+}
+
+.to-do-name {
+    width: 100px;
+    height: fit-content;
+    margin: 5px;
+}
+
+.to-do-name p{
+    height: 15px;
+}
+
+.delete-button img {
+    height: 10px;
+}
+
+
+.to-do-checkbox, .to-do-name, .to-do-delete {
+    
+}
+
+.delete-user {
+    display: relative;
+    bottom: 20px;
+    right: 20px;
+}
+#delete-user-button {
+
+}
