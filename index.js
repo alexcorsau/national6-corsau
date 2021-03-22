@@ -44,7 +44,7 @@ function addNewTodo(){
 //function for updating the response.todo list from the server with the new ToDo, using .push() method on the ToDo array
 function updateToDoList(response){
     let payload = response;
-    console.log("payload object before push in array todo",payload);
+    //console.log("payload object before push in array todo",payload); //only for testing
     const input = document.getElementById("add-task-input");
     if(input.value){
         let newToDo = {
@@ -52,10 +52,11 @@ function updateToDoList(response){
             item: input.value
             }
         payload.todo.push(newToDo);
+        input.value="";
     } else {
         window.alert("Please write a task name");
         }
-    console.log("payload object after push in array todo",payload);
+    //console.log("payload object after push in array todo",payload); //only for testing
     return payload; //returning the modified payload
 }
 
@@ -72,10 +73,8 @@ function updateServer(newPayload) {
 
 //function for iterating on the ToDo array from the response from the server passing each ToDo from that array to "renderTask" function with takes 2 arguments: ToDo and an index created dynamically necessary for further targeting and identifying
 function renderToDoList(response){
-    console.log("PAYLOAD from render todolist:",response.todo);
     toDoListDiv.innerHTML="";
     for (element of response.todo) {
-        // console.log(element);
         renderTask(element,response.todo.indexOf(element));
     } 
 }
@@ -90,7 +89,6 @@ function renderTask(element,index){
     const toDoCheckBox = document.createElement("input");
     toDoCheckBox.setAttribute("type","checkbox");
 
-    console.log(toDoCheckBox, toDoCheckBox.checked);
     toDoCheckBox.classList.add("to-do-checkbox");
     
     //creating on each checkbox an EVENT LISTENER when changing the status of the checkbox and calling changeStatus() function
@@ -101,7 +99,7 @@ function renderTask(element,index){
 
     const toDoDelete = document.createElement("button");
     toDoDelete.classList.add("delete-button");
-    toDoDelete.addEventListener("click",deleteTask); ////creating on each delete icon an EVENT LISTENER when pressing the button to call the deleteTask() function
+    toDoDelete.addEventListener("click",deleteTask); //creating on each delete icon an EVENT LISTENER when pressing the button to call the deleteTask() function
     const toDoDeleteImg = document.createElement("img");
     toDoDeleteImg.setAttribute("src","delete.png");
     toDoDelete.appendChild(toDoDeleteImg);
@@ -111,12 +109,12 @@ function renderTask(element,index){
     toDoCheckBox.checked = element.checked;
     toDoCheckBox.name = element.item;
 
-    //appending al the elements to each other
+    //appending all the elements to each other
     toDoDiv.appendChild(toDoCheckBox);
     toDoDiv.appendChild(toDoName);
     toDoDiv.appendChild(toDoDelete);
-    //appending al the elements to division in the BODY of the HTML
-    toDoListDiv.appendChild(toDoDiv);
+    //appending all the elements to division in the BODY of the HTML
+    toDoListDiv.prepend(toDoDiv);
 }
 
 //function for changing the status of the checkbox by GETting the data from the server, updating the checkbox status and then Updating the data on the server with a PUT method
@@ -136,7 +134,7 @@ function updateTask(response){
         element.checked = false;
     }
     for (const element of box) {
-        console.log(element.parentNode.id);
+        //console.log(element.parentNode.id); //only for testing
         payload.todo[element.parentNode.id].checked = true;
     }
     //console.log(payload); //only for testing
@@ -155,18 +153,12 @@ function deleteTask(){
 function removeTaskFromResponse(response){
     let payload = response;
     let newPayloadArray =[];
-    // console.log(payload); //only for testing
     // console.log(payload.todo);//only for testing
     let remainingTasksList = document.querySelectorAll(".to-do-division");
-    //console.log(remainingTasksList); //only for testing
+    // console.log(remainingTasksList); //only for testing
     for (const element of remainingTasksList) {
-        // console.log(element.id); //only for testing
-        // console.log(payload.todo[element.id]);//only for testing
         newPayloadArray.push(payload.todo[element.id]);
         }
-    // console.log(payload);//only for testing
-    // console.log(newPayloadArray);//only for testing
-    payload.todo = newPayloadArray;
-    // console.log(payload);//only for testing
+    payload.todo = newPayloadArray.reverse();
     updateServer(payload);
 }

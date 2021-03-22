@@ -37,6 +37,7 @@
 .add-new-task input {
     margin-right:5px;
     padding:0;    
+    width: 200px;
 }
 
 #add-new-task-button{
@@ -58,7 +59,7 @@
 }
 
 .to-do-name {
-    width: 100px;
+    width: 200px;
     height: fit-content;
     margin: 5px;
 }
@@ -72,15 +73,9 @@
 }
 
 
-.to-do-checkbox, .to-do-name, .to-do-delete {
-    
-}
+
 
 .delete-user {
-    display: relative;
-    bottom: 20px;
-    right: 20px;
-}
-#delete-user-button {
-
+    margin-top: 20px;
+    display: none;
 }
