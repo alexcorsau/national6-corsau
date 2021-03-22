@@ -75,18 +75,21 @@ function renderToDoList(response){
     toDoListDiv.innerHTML="";
     for (element of response.todo) {
         // console.log(element);
-        renderTask(element);
+        renderTask(element,response.todo.indexOf(element));
     } 
 }
 
 
-function renderTask(element){
+function renderTask(element,index){
 
     const toDoDiv = document.createElement("div");
     toDoDiv.classList.add("to-do-division");
+    toDoDiv.setAttribute("id",index);
 
     const toDoCheckBox = document.createElement("input");
     toDoCheckBox.setAttribute("type","checkbox");
+
+    console.log(toDoCheckBox, toDoCheckBox.checked);
     toDoCheckBox.classList.add("to-do-checkbox");
     
     toDoCheckBox.addEventListener("change",changeStatus);
@@ -96,12 +99,14 @@ function renderTask(element){
 
     const toDoDelete = document.createElement("button");
     toDoDelete.classList.add("delete-button");
+    toDoDelete.addEventListener("click",deleteTask);
     const toDoDeleteImg = document.createElement("img");
     toDoDeleteImg.setAttribute("src","delete.png");
     toDoDelete.appendChild(toDoDeleteImg);
 
     toDoName.innerText = element.item;
     toDoCheckBox.checked = element.checked;
+    toDoCheckBox.name = element.item;
 
     toDoDiv.appendChild(toDoCheckBox);
     toDoDiv.appendChild(toDoName);
@@ -112,18 +117,74 @@ function renderTask(element){
 }
 
 
-function checkTasks(){
-let statusList = document.getElementsByClassName("to-do-checkbox");
-
-// document.getElementsByClassName("to-do-checkbox").addEventListener("change",changeStatus);
-console.log(statusList);
-
-}
-checkTasks();
-
 function changeStatus(){
-    console.log("click on checkbox");
-    console.log(this.parentNode);
-    console.log(this.checked);
-    
+    fetch("https://simple-json-server-scit.herokuapp.com/todo/acorsau")
+    .then(handleFetchResponse)
+    .then(updateTask)
 }
+
+function updateTask(response){
+    let payload = response;
+    console.log(payload);
+    let box = document.querySelectorAll(":checked");
+    console.log("the boxes with checked value true",box);
+    for (const element of payload.todo) {
+        element.checked = false;
+    }
+    for (const element of box) {
+        console.log(element.parentNode.id);
+        payload.todo[element.parentNode.id].checked = true;
+    }
+    console.log(payload);
+    fetch('https://simple-json-server-scit.herokuapp.com/todo/acorsau', {
+        method: "PUT",
+        headers: {
+            'Content-Type': 'application/json'
+            },
+        body: JSON.stringify(payload)
+    }).then(getData);
+}
+
+function deleteTask(){
+    this.parentNode.remove();
+    fetch("https://simple-json-server-scit.herokuapp.com/todo/acorsau")
+    .then(handleFetchResponse)
+    .then(removeTaskFromResponse)
+}
+
+function removeTaskFromServer(taskId){
+    fetch("https://simple-json-server-scit.herokuapp.com/todo/acorsau")
+    .then(handleFetchResponse)
+    .then(removeTaskFromResponse)
+}
+
+function removeTaskFromResponse(response){
+    let payload = response;
+    let newPayloadArray =[];
+    console.log(payload);
+    console.log(payload.todo);
+    let remainingTasksList = document.querySelectorAll(".to-do-division");
+    console.log(remainingTasksList);
+    let indexArray = Array.of()
+    // for (const element of payload.todo) {
+    //     if(remainingTasksList.includes)
+    // }
+    for (const element of remainingTasksList) {
+        console.log(element.id);
+        console.log(payload.todo[element.id]);
+        newPayloadArray.push(payload.todo[element.id]);
+    }
+    //     if(payload.todo[element.id]) {
+    //         payload.todo.(element);
+    //         console.log(element.id);
+    //     }
+    // }
+    console.log(payload);
+    console.log(newPayloadArray);
+    payload.todo = newPayloadArray;
+    console.log(payload);
+    updateServer(payload);
+    }
+
+
+
