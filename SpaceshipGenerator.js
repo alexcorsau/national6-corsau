@@ -17,7 +17,7 @@ class Spaceship {
 
     setFly(){
         document.addEventListener("keydown",(event)=>{
-            if(this.ref===actualShip.ref /*this.ref.classList.contains("spaceship--active")*/){
+            if(this.ref.classList.contains("spaceship--active")){
                 //console.log("go fly!");
                 this.flyShip(event.key);
             }
@@ -47,15 +47,15 @@ class Spaceship {
         } 
     }
     choseOnClick(){
-        // this.ref.addEventListener("click",()=>{
-        //     if(this.ref.classList.contains("spaceship--active")) {
-        //         this.ref.classList.remove("spaceship--active")
-        //     } else {
-        //         if(document.querySelector(".spaceship--active")){
-        //             document.querySelector(".spaceship--active").classList.remove("spaceship--active");
-        //         }
-        //         this.ref.classList.add("spaceship--active");
-        //     }
-        // });
+        this.ref.addEventListener("click",()=>{
+            if(this.ref.classList.contains("spaceship--active")) {
+                this.ref.classList.remove("spaceship--active")
+            } else {
+                if(document.querySelector(".spaceship--active")){
+                    document.querySelector(".spaceship--active").classList.remove("spaceship--active");
+                }
+                this.ref.classList.add("spaceship--active");
+            }
+        });
     }
 }
