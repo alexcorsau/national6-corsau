@@ -1,7 +1,9 @@
 console.log("Spaceship Homework - Alex Corsau");
 
-document.getElementById("generate-starship").addEventListener("click",generateStarship());
+document.getElementById("generate-spaceship").addEventListener("click",generateStarship);
+let actualShip;
 
 function generateStarship(){
-    
+    actualShip = new Spaceship();
+    console.log(actualShip.ref);
 }

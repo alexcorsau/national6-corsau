@@ -1,0 +1,19 @@
+body {
+    height: fit-content;
+}
+
+#generate-spaceship {
+    display: block;
+}
+
+.spaceship {
+    height: 100px;
+    display: block;
+    margin: 10px;
+}
+
+.spaceship--active {
+    height: 100px;
+    display: block;
+    margin: 10px;
+}
