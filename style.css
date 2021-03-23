@@ -1,19 +1,31 @@
+
 body {
-    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
 }
 
 #generate-spaceship {
     display: block;
+    width: 100px;
 }
 
 .spaceship {
-    height: 100px;
+    height: 50px;
+    width: 50px;
     display: block;
     margin: 10px;
+    float: left;
+    
 }
 
 .spaceship--active {
-    height: 100px;
+    height: 50px;
+    width: 50px;
     display: block;
     margin: 10px;
+    float: left;
+    /* box-shadow: 0px 0px 5px 3px rgba(0,0,0,0.51); */
+    /* animation: fly 2s infinite ease-in-out; */
+    /* transform: scale(1.2); */
 }

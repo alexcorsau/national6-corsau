@@ -8,23 +8,17 @@ class Spaceship {
     }
 
     createHtmlRef() {
-        //this.ref = document.createElement("div");
         this.ref = document.createElement("img");
         let shipType = ["blue-spaceship.png","green-spaceship.png","red-spaceship.png"];
         this.ref.src = shipType[Math.floor(Math.random()*3)];
         this.ref.classList.add("spaceship");
-
         document.body.appendChild(this.ref);
       }
 
     setFly(){
         document.addEventListener("keydown",(event)=>{
-            console.log(event.key);
-            console.log("this.ship:",this.ref);
-            // console.log("actual ship:",actualShip.ref);
-            
-            if(this.ref===actualShip.ref){
-                console.log("go fly!");
+            if(this.ref===actualShip.ref /*this.ref.classList.contains("spaceship--active")*/){
+                //console.log("go fly!");
                 this.flyShip(event.key);
             }
         });
@@ -33,19 +27,19 @@ class Spaceship {
     flyShip(direction){
         switch (direction) {
             case "ArrowUp": {
-                this.yPosition = this.yPosition - 5;
+                this.yPosition = this.yPosition - 10;
                 this.ref.style.transform = `translate(${this.xPosition}px,${this.yPosition}px)`;
             } break;
             case "ArrowDown": {
-                this.yPosition = this.yPosition + 5;
+                this.yPosition = this.yPosition + 10;
                 this.ref.style.transform = `translate(${this.xPosition}px,${this.yPosition}px)`;
                 } break;
             case "ArrowLeft": {
-                this.xPosition = this.xPosition - 5;
+                this.xPosition = this.xPosition - 10;
                 this.ref.style.transform = `translate(${this.xPosition}px,${this.yPosition}px)`;
                 } break;
             case "ArrowRight": {
-                this.xPosition = this.xPosition + 5;
+                this.xPosition = this.xPosition + 10;
                 this.ref.style.transform = `translate(${this.xPosition}px,${this.yPosition}px)`;
                 } break;
             default:
@@ -53,11 +47,15 @@ class Spaceship {
         } 
     }
     choseOnClick(){
-
-        // document.addEventListener("click",()=>{
-        //     actualShip= this;
-        //     console.log("this.ref:",this.ref);
-        //     console.log("actualship from chose function:",actualShip.ref);
+        // this.ref.addEventListener("click",()=>{
+        //     if(this.ref.classList.contains("spaceship--active")) {
+        //         this.ref.classList.remove("spaceship--active")
+        //     } else {
+        //         if(document.querySelector(".spaceship--active")){
+        //             document.querySelector(".spaceship--active").classList.remove("spaceship--active");
+        //         }
+        //         this.ref.classList.add("spaceship--active");
+        //     }
         // });
     }
 }

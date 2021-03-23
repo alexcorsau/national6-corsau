@@ -5,5 +5,4 @@ let actualShip;
 
 function generateStarship(){
     actualShip = new Spaceship();
-    console.log(actualShip.ref);
 }
