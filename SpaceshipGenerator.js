@@ -13,6 +13,14 @@ class Spaceship {
         this.ref.src = shipType[Math.floor(Math.random()*3)];
         this.ref.classList.add("spaceship");
         document.body.appendChild(this.ref);
+        if(this.ref.classList.contains("spaceship--active")) {
+            this.ref.classList.remove("spaceship--active")
+        } else {
+            if(document.querySelector(".spaceship--active")){
+                document.querySelector(".spaceship--active").classList.remove("spaceship--active");
+            }
+            this.ref.classList.add("spaceship--active");
+        }
       }
 
     setFly(){
