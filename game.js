@@ -36,21 +36,22 @@ class Player extends GameObject {
     super();
     this.lives=[]; //added an attribute equal to the array containing the lives of the player
     this.ref.style.background = "blue";
+    //this.ref.classList.add("player--collision");
     this.move(50, 225);
     this.addLives(numberOfLives);
     this.removeLife;
   }
 
   moveUp() {
-    if (this.y - 25 >= 0) this.move(this.x, this.y - 25);
+    if (this.y - playerStep >= 0) this.move(this.x, this.y - playerStep);
   }
 
   moveDown() {
-    if (this.y + 25 <= 500 - this.height) this.move(this.x, this.y + 25);
+    if (this.y + playerStep <= 500 - this.height) this.move(this.x, this.y + playerStep);
   }
 
   //added the addLives method on the Player Class with a "number of lives" parameter
-  //this method allows for further new features of the game 
+  //this method allows for further new features of the game besides the instantiating of the player object with a given number of lives (user input value, difficulty level input, etc.)
   addLives(numberOfLives){
     let livesDivision = document.getElementById("player-lives");
     for(let i=0;i<numberOfLives;i++){
@@ -64,7 +65,7 @@ class Player extends GameObject {
     }
 }
 
-//added the removelife method on the Player Class 
+//added the removelife method on the Player Class for current task and further development possibilities
   removeLife() {
     this.lives.pop().remove();
   }
@@ -78,7 +79,7 @@ class Obstacle extends GameObject {
   }
 
   moveLeft() {
-    this.move(this.x - 5, this.y);
+    this.move(this.x - obstacleStep, this.y);
   }
 }
 
@@ -143,24 +144,32 @@ function collisionDetection(player, obstacles) {
   for (const obstacle of obstacles) {
     // console.log(player.x, player.x + player.width, obstacle.x);
 
-    if (
-      (player.x <= obstacle.x &&
-        obstacle.x <= player.x + player.width &&
-        player.y <= obstacle.y &&
-        obstacle.y <= player.y + player.height) ||
-      (player.x <= obstacle.x + obstacle.width &&
-        obstacle.x + obstacle.width <= player.x + player.width &&
-        player.y <= obstacle.y + obstacle.height &&
-        obstacle.y + obstacle.height <= player.y + player.height)
+      // the collision is optimized by following actions:
+      // 1. adjusting the setInterval interval with the movement of the object, movement of the player and the creating of new obstacles 
+      // 2. considering the movement of the obstacles and the player when verifying the collision because there is a difference between rendering and calculating the collision at every step: obstacleStep on X axis and playerStep on Y axis
+    if(
+      ((player.x+player.width >= obstacle.x+obstacleStep) && (player.x+obstacleStep<=obstacle.x+obstacle.width))
+      && ((player.y+player.height >= obstacle.y+playerStep) && (player.y+playerStep<=obstacle.y+obstacle.height))
     )
-      {//removing the obstacle form HTML and obstacle array, an attribute of the ObstacleFactory Class, when colliding with the player
-        obstacle.ref.remove(); 
-        obstacles.splice(obstacles.indexOf(obstacle),1);
-        return true;
-        
-      }
-  }
 
+    // if (
+    //   (player.x <= obstacle.x &&
+    //     obstacle.x <= player.x + player.width &&
+    //     player.y <= obstacle.y &&
+    //     obstacle.y <= player.y + player.height) ||
+    //   (player.x <= obstacle.x + obstacle.width &&
+    //     obstacle.x + obstacle.width <= player.x + player.width &&
+    //     player.y <= obstacle.y + obstacle.height &&
+    //     obstacle.y + obstacle.height <= player.y + player.height)
+    //   )
+        {//removing the obstacle from HTML and obstacles array (an attribute of the ObstacleFactory Class), when colliding with the player
+          obstacles.splice(obstacles.indexOf(obstacle),1);
+          obstacle.ref.remove();
+          return true;
+          
+        }
+        
+  }
   return false;
 }
 
@@ -175,8 +184,27 @@ const player = new Player(lives); // modified the Player Class so that every pla
 const obstacleFactory = new ObstacleFactory();
 
 let count = 0;
+// global variable to count the number of loops for the game
+
+
+//game speed ratio = obstalceStep / gameSpeed = 1/10;
+
+let obstacleStep=1;
+// global variable for the distance the obstacles move every loop
+
+let playerStep=5;
+// global variable for the distance the player moves every loop if the UP/DOWN keys are pressed
+
+let gameDifficulty = 50; 
+//added a new global variable for the game difficulty, the periodicity of the game speed that creates new obstacles
+//the higher the number is the easier the game is: obstacles are created less often
+
+let gameSpeed=10; 
+// added a new global variable for the game speed. is the second argument for the SET INTERVAL function
+//the smaller the number is the faster the obstacles move
 
 let start=false;
+// added a new global variable for the functionality of the START BUTTON
 
 
 // Game Loop
@@ -193,23 +221,22 @@ if(!start){
     if (keyUpPress) player.moveUp();
     if (keyDownPress) player.moveDown();
   
-    if (count % 10 === 0) obstacleFactory.createObstacle();
+    if (count % gameDifficulty === 0) obstacleFactory.createObstacle();
   
-    obstacleFactory.moveObstacles();
     if (collisionDetection(player, obstacleFactory.obstacles)) {
       player.removeLife();
-      // clearInterval(gameLoop);
-      // alert("You hit an obstacle");
-      // window.location = "/";
     }
+
+    obstacleFactory.moveObstacles();
+    
     if(player.lives.length===0) {
       clearInterval(gameLoop);
       alert("You lost!");
-      // window.location = "/";
+      window.location = "/";
     }
     obstacleFactory.destroyObstacles();
     count++;
-  }, 50);
+  }, gameSpeed);
 }
 
 });
