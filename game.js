@@ -164,7 +164,7 @@ function collisionDetection(player, obstacles) {
     //   )
         {//removing the obstacle from HTML and obstacles array (an attribute of the ObstacleFactory Class), when colliding with the player
           obstacles.splice(obstacles.indexOf(obstacle),1);
-          obstacle.ref.remove();
+          obstacle.removeRef();
           return true;
           
         }
