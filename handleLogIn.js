@@ -8,8 +8,8 @@ document.getElementById("login").addEventListener("click",()=>{
      const password = inputPassword.value;
 
      if(name && password===password_check) {
-         document.cookie = `name=${name}`;
-         document.cookie = `password=${password}`;
+        localStorage.setItem("name",name);
+        localStorage.setItem("password",password);
          window.location = "/";
      }
 });
