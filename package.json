@@ -4,6 +4,7 @@
   "description": "scit project of alexc",
   "main": "script.js",
   "scripts": {
+    "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,6 +18,10 @@
   },
   "homepage": "https://github.com/alexcorsau/national6-corsau#readme",
   "dependencies": {
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "webpack": "^5.30.0"
+  },
+  "devDependencies": {
+    "webpack-cli": "^4.6.0"
   }
 }
