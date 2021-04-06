@@ -1,0 +1,22 @@
+{
+  "name": "national6-corsau",
+  "version": "1.0.0",
+  "description": "scit project of alexc",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexcorsau/national6-corsau.git"
+  },
+  "author": "alexc",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexcorsau/national6-corsau/issues"
+  },
+  "homepage": "https://github.com/alexcorsau/national6-corsau#readme",
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+}
