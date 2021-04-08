@@ -45,8 +45,20 @@ function renderBreeds(breedList) {
 
    for (const breed of Object.keys(breedList.message)) {
     console.log(breed);
-    // renderArticle(breed);
+    renderBreed(breed);
   }
+}
+
+function renderBreed(breed){
+  const breedDiv = document.createElement("div");
+  const breedName = document.createElement("p");
+  breedName.innerText = breed;
+  breedName.setAttribute("id",breed);
+  breedName.addEventListener("click",selectBreed);
+
+  breedDiv.appendChild(breedName);
+
+  document.getElementById("breeds").appendChild(breedDiv);
 }
 
 function showImage(imageResponseMessage) {
@@ -56,8 +68,12 @@ function showImage(imageResponseMessage) {
   console.log("imageResponseMessage[0]: ",imageResponseMessage.message[267]);
   console.log("typeOf imageResponseMessage[0] : ",typeof(imageResponseMessage.message[267]));
 
-  document.getElementById("breed-image").setAttribute("src",imageResponseMessage.message[267
-]);
-
+  document.getElementById("breed-image").setAttribute("src",imageResponseMessage.message[267]);
 }
 
+
+function selectBreed(){
+  localStorage.setItem("breed",this.id);
+  localStorage.setItem("index",this.id);
+  this.setAttribute("style","underline");
+}
