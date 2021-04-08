@@ -74,6 +74,6 @@ function showImage(imageResponseMessage) {
 
 function selectBreed(){
   localStorage.setItem("breed",this.id);
-  localStorage.setItem("index",this.id);
-  this.setAttribute("style","underline");
+  // localStorage.setItem("index",);
+  this.classList.add("breed--selected");
 }
