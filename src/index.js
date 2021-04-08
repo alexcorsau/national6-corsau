@@ -1,23 +1,8 @@
 import { renderArticles } from "./article";
+import { getApiPostsData } from "./utils/api";
 
-console.log("javascript-AJAX-CRUD-homewolrk-solution-modularisation");
+console.log("javascript-AJAX-CRUD-homework-solution-modularization");
 
-const articleListHtml = document.querySelector(".article-list");
+document.getElementById("get-data").addEventListener("click", () => {getApiPostsData(renderArticles)});
 
-document.getElementById("get-data").addEventListener("click", function () {
-  fetch("https://simple-json-server-scit.herokuapp.com/posts")
-    .then(handleFetchResponse)
-    .then(useJSONResponse);
-});
-
-function handleFetchResponse(response) {
-  console.log("response", response);
-  return response.json();
-}
-
-function useJSONResponse(json) {
-  console.log(json);
-
-  renderArticles(json);
-}
 

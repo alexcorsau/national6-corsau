@@ -1,3 +1,8 @@
+import { renderComments } from "./comments";
+import { getApiCommentsData } from "./utils/api";
+
+const articleListHtml = document.querySelector(".article-list");
+
 export function renderArticles(articleList) {
     articleListHtml.innerText = "";
   
@@ -19,5 +24,11 @@ export function renderArticles(articleList) {
   
     articleTitle.innerText = articleData.title;
     articleContent.innerText = articleData.content;
+
+    // getApiCommentsData(articleData.id,(json)=>{console.log(json)});
+    getApiCommentsData(articleData.id,(json)=>{
+        console.log(json);
+        renderComments(json,article);
+    });
   }
   
