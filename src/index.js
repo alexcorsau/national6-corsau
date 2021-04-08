@@ -1,8 +1,23 @@
-console.log("Entry point to webpack");
-import { addPixel } from "./utils/addUnitsType"
+import { renderArticles } from "./article";
 
-const aRandomNumber = Math.floor(Math.random()*20);
+console.log("javascript-AJAX-CRUD-homewolrk-solution-modularisation");
 
-console.log(aRandomNumber);
-const aRandomNumberWithPixel = addPixel(aRandomNumber);
-console.log(aRandomNumberWithPixel);
+const articleListHtml = document.querySelector(".article-list");
+
+document.getElementById("get-data").addEventListener("click", function () {
+  fetch("https://simple-json-server-scit.herokuapp.com/posts")
+    .then(handleFetchResponse)
+    .then(useJSONResponse);
+});
+
+function handleFetchResponse(response) {
+  console.log("response", response);
+  return response.json();
+}
+
+function useJSONResponse(json) {
+  console.log(json);
+
+  renderArticles(json);
+}
+
