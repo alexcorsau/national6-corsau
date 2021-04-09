@@ -86,6 +86,6 @@ body {
   margin: 10px;
 }
 
-#breed--selected {
-  text-underline-position: auto;
+.breed--selected {
+  text-decoration: underline;
 }
