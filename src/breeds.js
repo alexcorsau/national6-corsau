@@ -49,7 +49,7 @@ export function showPreviousImage(){
         if(localStorage.index>=1) {
             localStorage.index--;
             }
-        modifyPageNumber()
+        modifyPageNumber();
     }
   }
   
@@ -58,7 +58,7 @@ export function showNextImage(){
         if(localStorage.index<currentBreedPictures.length-1) {
             localStorage.index++;
             }
-        modifyPageNumber()
+        modifyPageNumber();
     }
 }
 
