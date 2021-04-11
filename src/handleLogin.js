@@ -1,3 +1,5 @@
+console.log("this is the login.js file");
+
 const inputName = document.getElementById("name");
 const inputPassword = document.getElementById("password");
 

@@ -1,5 +1,3 @@
-// const { toInteger } = require("");
-
 
 console.log("JavaScript - Dogs App");
 let breedListArray =[];
@@ -8,7 +6,6 @@ let currentBreedPictures = [];
 if (!localStorage.getItem("name") || !localStorage.getItem("password")) {
   window.location = "/login.html";
 }
-
 
 
 document.getElementById("logout").addEventListener("click", () => {
