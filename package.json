@@ -1,0 +1,24 @@
+{
+  "name": "nat6-corsau-dog-app-m-version",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "build": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexcorsau/national6-corsau.git"
+  },
+  "author": "alexc",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexcorsau/national6-corsau/issues"
+  },
+  "homepage": "https://github.com/alexcorsau/national6-corsau#readme",
+  "devDependencies": {
+    "webpack": "^5.31.2",
+    "webpack-cli": "^4.6.0"
+  }
+}
