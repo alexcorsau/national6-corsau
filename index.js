@@ -14,6 +14,9 @@ document.getElementById("logout").addEventListener("click", () => {
   window.location = "/";
 });
 
+document.getElementById("backward").addEventListener("click",showPreviousImage);
+document.getElementById("forward").addEventListener("click",showNextImage);
+
 fetch("https://dog.ceo/api/breeds/list/all")
 .then(handleFetchResponse)
 .then(renderBreeds)
@@ -64,11 +67,11 @@ function renderImage(imageResponseMessage) {
     else document.getElementById("breed-image").setAttribute("src",currentBreedPictures[0]);
 }
 
-document.getElementById("backward").addEventListener("click",showPreviousImage);
-document.getElementById("forward").addEventListener("click",showNextImage);
+
 
 function showPreviousImage(){
-  if(document.querySelector(".breed-selected")){
+  if(document.querySelector(".breed--selected")){
+    console.log("Previous Picture");
     if(localStorage.index>=1) {
       localStorage.index--;
     }
@@ -79,7 +82,8 @@ function showPreviousImage(){
 }
 
 function showNextImage(){
-  if(document.querySelector(".breed-selected")){
+  if(document.querySelector(".breed--selected")){
+    console.log("Next Picture");
     if(localStorage.index<currentBreedPictures.length-1) {
       localStorage.index++;
     }
