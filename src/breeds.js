@@ -27,9 +27,7 @@ export function selectBreed(){
         document.querySelector(".breed--selected").classList.remove("breed--selected");
         } 
     localStorage.setItem("index",0);
-    // modifyPageNumber();
-    document.getElementById("page-number").innerText = "";
-    document.getElementById("page-number").innerText = parseInt(localStorage.index)+1;
+    modifyPageNumber();
     localStorage.setItem("breed",this.id);
     this.classList.add("breed--selected");
     getBreedImagesFromServer(renderImage);
@@ -51,10 +49,7 @@ export function showPreviousImage(){
         if(localStorage.index>=1) {
             localStorage.index--;
             }
-        // modifyPageNumber()
-        document.getElementById("page-number").innerText = "";
-        document.getElementById("page-number").innerText = parseInt(localStorage.index)+1;
-        document.getElementById("breed-image").setAttribute("src",currentBreedPictures[localStorage.index]);
+        modifyPageNumber()
     }
   }
   
@@ -63,10 +58,7 @@ export function showNextImage(){
         if(localStorage.index<currentBreedPictures.length-1) {
             localStorage.index++;
             }
-        // modifyPageNumber()
-        document.getElementById("page-number").innerText = "";
-        document.getElementById("page-number").innerText = parseInt(localStorage.index)+1;
-        document.getElementById("breed-image").setAttribute("src",currentBreedPictures[localStorage.index]);
+        modifyPageNumber()
     }
 }
 
