@@ -25,3 +25,25 @@ p {
     color: white;
     margin: left 20px;;
 }
+
+#task-name{
+    margin: 5px;
+}
+
+#add-task-button {
+    width:15px;
+    height: 15px;
+    background-color: coral;
+    border-radius: 100%;
+    padding: 5px;
+}
+#add-task-button img{
+    width: 10px;
+    height: 10px;
+}
+
+.actions {
+    display: flex;
+    justify-items: center;
+    align-items: center;
+}
