@@ -1,0 +1,7 @@
+.app-header {
+    background: rgba(245, 180, 82, 0.836);
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
