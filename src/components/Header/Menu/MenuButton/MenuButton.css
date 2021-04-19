@@ -1,0 +1,13 @@
+.app-menu-button {
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    background: white;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+.menu-button {
+    height: 70%;
+    margin-top: 5px;
+}

@@ -1,0 +1,24 @@
+.app-menu-flyout {
+    background: white;
+    width: 60px;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    border-bottom: 1px grey solid;
+    border-right: 1px grey solid;
+    border-radius: 5px;
+    display: none;
+    
+}
+
+.app-menu-flyout--hoover {
+    background: white;
+    width: 60px;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    border-bottom: 1px grey solid;
+    border-right: 1px grey solid;
+    border-radius: 5px;
+    display: inline-block;
+}
