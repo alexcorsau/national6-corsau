@@ -1,4 +1,5 @@
 import { Component } from "react";
+import trashCan from "./trash.svg"
 
 export class ToDoItemWithState extends Component {
     state= {
@@ -6,8 +7,8 @@ export class ToDoItemWithState extends Component {
     }
 
     handleIncreaseClick = ()=> {
-        console.log("click on item");
-        this.setState({nrOfClick:1});
+        console.log("click on item: ", this.state.nrOfClick+1);
+        this.setState({nrOfClick: this.state.nrOfClick+1});
     }
    
     render(){
@@ -15,7 +16,7 @@ export class ToDoItemWithState extends Component {
             <div className="to-do-item" onClick={this.handleIncreaseClick}>
                 <input type="checkbox" defaultChecked={this.props.checkValue}></input>
                 <p>{this.props.label}</p>
-                <img id="trash" src="https://www.flaticon.com/svg/vstatic/svg/1345/1345823.svg?token=exp=1618938207~hmac=5f9d940dc13f6c93d7770f3215191848" alt="delete button"></img>
+                <img id="trash" src={trashCan} alt="delete button"></img>
                 <p>{this.state.nrOfClick}</p>
             </div>
         )
