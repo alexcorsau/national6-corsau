@@ -1,0 +1,7 @@
+.input-field{
+    display: flex;
+}
+.input-field textarea{
+    width: auto;
+    height: 300px;
+}
