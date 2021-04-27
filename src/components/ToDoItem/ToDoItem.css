@@ -8,3 +8,7 @@
 .to-do-item > * {
     margin-right: 10px;
 }
+
+.add-item--invalid{
+    border: 4px red solid;
+}
