@@ -1,5 +1,26 @@
 .input-field {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+
+.input-field p{
+    width: 150px;
+}
+
+.input-field:nth-child(4){
+    align-items: flex-start;
+}
+
+.input-field input{
     width: 300px;
-    height: 50px;
-    margin: 20px;
+    /* height: 15px; */
+    padding: 5px;
+}
+
+.input-field textarea{
+    width: 300px;
+    height: 300px;
+    padding: 5px;
 }
