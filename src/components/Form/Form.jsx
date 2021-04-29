@@ -22,10 +22,17 @@ export class Form extends Component {
         this.setState({[Object.keys(this.state).filter((item)=>item===string).toString()]:event.target.value});
         // this.state= newStateObject;
         console.log("this.state: ",this.state);
+
+        // if(()
+        // &&()
+        // &&()
+        // &&()
+        // )
     }
 
     handleSend = () => {
         console.log("Send Button Pressed");
+        console.log(this.state.allInputsValid);
         if(this.state.allInputsValid) {
             window.alert("Message has been sent!");
             this.setState({
@@ -35,7 +42,9 @@ export class Form extends Component {
                 message: "",
                 allInputsValid: false});
             
-        } 
+        } else {
+
+            }
     }
 
     componentDidUpdate(){
@@ -44,6 +53,10 @@ export class Form extends Component {
 
     render(){
         console.log();
+        // let inputFieldClass = "input-field";
+        // if(this.state.firstName===""){
+
+        // }
         return (
             <div className="form">
                 <FormField 
@@ -51,6 +64,7 @@ export class Form extends Component {
                     id="firstName"
                     label="FIRST NAME" 
                     handleChange={this.handleChange}
+                    // className=
                 />
 
                 <FormField 
