@@ -10,4 +10,13 @@
     margin-left: 20px;
     color: white;
   }
+
+  .navigation {
+    display: flex;
+    margin-left: auto;
+  }
+  .navigation a {
+    margin: 10px;
+    text-decoration: none;
+  }
   
