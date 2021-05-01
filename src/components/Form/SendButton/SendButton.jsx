@@ -1,9 +1,11 @@
-
+import "./SendButton.css"
 
 export function SendButton(props){
     return(
-        <button className="send-button" onClick={()=>props.handleSend()}>
+        <div className="send-container">
+            <button className="send-button" onClick={()=>props.handleSend()}>
             Send
-        </button>
+            </button>
+        </div>
     )
 }
