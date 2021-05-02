@@ -22,33 +22,13 @@ export class Form extends Component {
     }
 
     handleChange = (event,string) => {
-        // console.log(Object.keys(this.state).filter((item)=>item===string).toString());
         this.setState({[Object.keys(this.state).filter((item)=>item===string).toString()]:event.target.value});
-        console.log("this.state: ",this.state);
-        // if(this.state.firstName!=="") {
-        //     this.setState({firstNameIsValid:true});
-        //     } else {
-        //         this.setState({firstNameIsValid:false});
-        //         };
-        // if(this.state.lastName!==""){
-        //     this.setState({lastNameIsValid:true});   
-        //     } else {
-        //         this.setState({lastNameIsValid:false});
-        //         };
-        // if(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(this.state.email)) {
-        //     this.setState({emailIsValid:true});
-        //     } else {
-        //         this.setState({emailIsValid:false});
-        //         };
-        // if(this.state.message!=="") {
-        //     this.setState({messageIsValid:true});
-        //     } else {
-        //         this.setState({messageIsValid:false});
-        //         };
+        // console.log("this.state: ",this.state);
     }
 
     handleSend = () => {
-        console.log("Send Button Pressed");
+        const emailPattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+        // console.log("Send Button Pressed");
         if(this.state.firstName!=="") {
             this.setState({firstNameIsValid:true});
             } else {
@@ -59,7 +39,7 @@ export class Form extends Component {
             } else {
                 this.setState({lastNameIsValid:false});
                 };
-        if(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(this.state.email)) {
+        if(emailPattern.test(this.state.email)) {
             this.setState({emailIsValid:true});
             } else {
                 this.setState({emailIsValid:false});
@@ -69,20 +49,27 @@ export class Form extends Component {
             } else {
                 this.setState({messageIsValid:false});
                 };
-        if(this.state.firstNameIsValid && this.state.lastNameIsValid && this.state.emailIsValid && this.state.messageIsValid) {
-            console.log("form is valid and data is sent");
-            this.setState({sentData:true});
-        }
-
-        if(this.state.firstName && this.state.lastName && (/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(this.state.email)) && this.state.message) {
-            console.log("form is valid and data is sent");
+       
+        if(this.state.firstName && this.state.lastName && emailPattern.test(this.state.email) && this.state.message) {
+            // console.log("form is valid and data is sent");
             this.setState({sentData:true});
         }
     }
 
     closeMessage=()=> {
-        console.log("close message");
-        window.location="/";
+        // console.log("close message");
+        Array.from(document.querySelectorAll("input")).forEach(input => (input.value = ""));
+        Array.from(document.querySelectorAll("textarea")).forEach(input => (input.value = ""));
+        this.setState({
+            firstName: "",
+            lastName: "",
+            email: "",
+            message: "",
+            firstNameIsValid: null,
+            lastNameIsValid: null,
+            emailIsValid: null,
+            messageIsValid: null,
+            sentData: false});
     }
 
     render(){
@@ -103,6 +90,7 @@ export class Form extends Component {
                     handleChange={this.handleChange}
                     invalid = {this.state.lastNameIsValid}
                 />
+                
                 <FormField 
                     key="email"
                     id="email"
@@ -123,13 +111,10 @@ export class Form extends Component {
                     handleSend={this.handleSend}
                 />
 
-                {this.state.sentData ? <ConfirmationMessage
-                closeMessage={this.closeMessage}
-                /> : null }
+                {this.state.sentData ? <ConfirmationMessage closeMessage={this.closeMessage}/> : null }
                 
             </div>
-        )
-        
+        ) 
     }
 }
     
